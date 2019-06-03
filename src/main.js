@@ -48,7 +48,6 @@ document.body.addEventListener('submit', e => {
 
 async function init() {
 	const [options, history] = await Promise.all([getOptions(), getHistoryItems()]);
-	console.log('init options', options);
 	app.$set({
 		options,
 		history,

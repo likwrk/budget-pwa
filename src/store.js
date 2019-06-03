@@ -26,7 +26,6 @@ export function getOptions() {
     } catch (e) {
       options = getDefaultOptions();
     }
-    console.log('getOptions options', options);
     resolve(options);
   });
 }
