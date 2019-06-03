@@ -1,14 +1,42 @@
 <script>
+	import Options from './Options.svelte';
+	import History from './History.svelte';
+	import AddItem from './AddItem.svelte';
+
 	export let options;
 	export let history;
-	import Options from './Options.svelte';
+	export let showOptions;
+	export let showHistory;
+
+	$:days = Math.floor((options.end - options.start) / (24 * 60 * 60 * 1000));
+	$:spentDays = Math.floor((Date.now() - options.start) / (24 * 60 * 60 * 1000));
+	$:perDay = Math.round(options.budget / days);
+	$:spent = history.reduce((total, item) => total + item.sum, 0);
+	$:maxSpentForToday = spentDays * perDay;
+	$:todayBudget = perDay - (spent - maxSpentForToday);
+
 </script>
 
 <style>
-	h1 {
-		color: purple;
+	main {
+		max-width: 600px;
+		margin: 0 auto;
+		width: 100%;
 	}
 </style>
 
-<h1>Hello</h1>
-<Options {options} />
+<main>
+	<p>Per day: {perDay}</p>
+	<p>Spent: {spent}</p>
+	<p>Budget for today: {todayBudget}</p>
+
+	<AddItem />
+	<button type="button" data-action="toggle-options">Options</button>
+	<button type="button" data-action="toggle-history">History</button>
+	{#if showOptions}
+		<Options {options} />
+	{/if}
+	{#if showHistory}
+		<History {history} />
+	{/if}
+</main>

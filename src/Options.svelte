@@ -1,20 +1,18 @@
 <script>
+  import { formatDate } from './date.js';
   export let options;
   let dateString = '';
+  let minDate = '';
   $: {
-    const date = new Date(options.end);
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-    dateString = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
-    console.log('dateString', dateString);
+    dateString = formatDate(new Date(options.end));
+    minDate = formatDate(new Date());
   }
 </script>
 
 <form data-action="save-options">
   <label for="end">Date to: </label>
-  <input type="date" value={dateString} id="end">
-  <label for="sum">Budget: </label>
-  <input type="number" value={options.sum} id="sum">
+  <input type="date" min={minDate} value={dateString} id="end" required>
+  <label for="budget">Budget: </label>
+  <input type="number" value={options.budget} id="budget" required>
   <button>Save</button>
 </form>
