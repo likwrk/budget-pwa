@@ -2,6 +2,10 @@
 
 ---
 
+# App
+
+[Budget PWA](https://likwrk.github.io/budget-pwa/public)
+
 # svelte app
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
