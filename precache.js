@@ -4,5 +4,5 @@ swPrecache.write(`${rootDir}/service-worker.js`, {
   staticFileGlobs: [
     rootDir + '/*',
   ],
-  // stripPrefix: rootDir
+  stripPrefix: rootDir
 }, () => { process.exit(0); });
