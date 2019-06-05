@@ -35,7 +35,7 @@
 
 <main>
 	<p>{start} - {end}</p>
-	<p>Day {spentDays} of {days}</p>
+	<p>Day {spentDays + 1} of {days}</p>
 	<p>Per day: {perDay}</p>
 	<p>Spent: {spent}</p>
 	<p>Budget for today: {todayBudget}</p>
