@@ -1,8 +1,14 @@
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec'];
+
 export function formatDate(date) {
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1;
   const day = date.getUTCDate();
   return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+}
+
+export function formatHumanDate(date) {
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}`;
 }
 
 export function formatTime(date) {
