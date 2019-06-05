@@ -15,7 +15,9 @@
     "sw-precache": "^5.2.1"
   },
   "scripts": {
-    "build": "rollup -c",
+    "precache": "node precache.js",
+    "build:prod": "rollup -c",
+    "build": "run-s build:prod precache",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
