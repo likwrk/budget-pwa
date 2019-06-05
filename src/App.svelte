@@ -10,10 +10,10 @@
 	export let showOptions;
 	export let showHistory;
 
-	$:start = formatDate(options.start);
-	$:end = formatDate(options.end);
+	$:start = formatDate(new Date(options.start));
+	$:end = formatDate(new Date(options.end));
 	$:days = Math.floor((options.end - options.start) / (24 * 60 * 60 * 1000));
-	$:spentDays = Math.floor((Date.now() - options.start) / (24 * 60 * 60 * 1000));
+	$:spentDays = Math.ceil((Date.now() - options.start) / (24 * 60 * 60 * 1000)) + 1;
 	$:perDay = Math.round(options.budget / days);
 	$:spent = history.reduce((total, item) => total + item.sum, 0);
 	$:maxSpentForToday = spentDays * perDay;
