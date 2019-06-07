@@ -17,7 +17,7 @@ export function formatHumanDate(dateOrTimestamp) {
 
 export function getDate(dateOrTimestamp) {
   const date = (typeof dateOrTimestamp === 'number') ? new Date(dateOrTimestamp) : new Date(dateOrTimestamp.getTime());
-  date.setHours(0, 0, 0, 0);
+  date.setUTCHours(0, 0, 0, 0);
   return date;
 }
 
