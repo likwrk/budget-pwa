@@ -3,21 +3,17 @@
 	import History from './History.svelte';
 	import AddItem from './AddItem.svelte';
 
-	import { formatDate, formatHumanDate } from './date.js';
+	import { formatHumanDate, getDateTimestamp } from './date.js';
 
 	export let options;
 	export let history;
 	export let showOptions;
 	export let showHistory;
 
-	$:start = formatHumanDate(new Date(formatDate(new Date(options.start))));
-	$:end = formatHumanDate(new Date(formatDate(new Date(options.end))));
+	$:start = formatHumanDate(options.start);
+	$:end = formatHumanDate(options.end);
 	$:days = Math.floor((options.end - options.start) / (24 * 60 * 60 * 1000));
-	$:spentDays = Math.ceil(
-		((new Date(formatDate(new Date(formatDate(new Date()))))).getTime()
-		- (new Date(options.start)).getTime())
-		/ (24 * 60 * 60 * 1000)
-		);
+	$:spentDays = Math.ceil( (getDateTimestamp(Date.now()) - getDateTimestamp(options.start)) / (24 * 60 * 60 * 1000) );
 	$:perDay = Math.round(options.budget / days);
 	$:spent = history.reduce((total, item) => total + item.sum, 0);
 	$:maxSpentForToday = spentDays * perDay;
@@ -51,6 +47,7 @@
 		left: 0;
 		top: 0;
 		height: 100%;
+		max-width: 100%;
 		background-color: #389;
 	}
 </style>

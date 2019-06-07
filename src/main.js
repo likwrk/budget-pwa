@@ -1,5 +1,6 @@
 import App from './App.svelte';
 import { updateOptions, getOptions, getHistoryItems, getDefaultOptions, clearHistory, addHistoryItem, removeHistoryItem } from './store';
+import { getDateTimestamp } from './date';
 
 let showOptions = false;
 let showHistory = false;
@@ -73,17 +74,18 @@ async function handleRemoveItem(button) {
 async function handleAddItem(form) {
 	const sum = Number(form.sum.value);
 	const category = form.category.value || '';
-	const history = await addHistoryItem({sum, category, timestamp: Date.now()});
+	const history = await addHistoryItem({sum, category, timestamp: getDateTimestamp(Date.now())});
 	form.reset();
 	app.$set({history});
 }
 
 async function handleOptionsUpdate(form) {
-	const end = (new Date(form.end.value)).getTime();
-	const active = Date.now() < end;
+	const end = getDateTimestamp(new Date(form.end.value));
+	const today = getDateTimestamp(Date.now());
+	const active = today < end;
 	const budget = Number(form.budget.value);
 	const [options, history] = await Promise.all([
-		updateOptions({end, active, budget, start: Date.now()}),
+		updateOptions({end, active, budget, start: today}),
 		clearHistory()
 	]);
 	showOptions = false;

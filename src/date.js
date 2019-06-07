@@ -1,14 +1,32 @@
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec'];
 
-export function formatDate(date) {
+
+
+export function formatDate(dateOrTimestamp) {
+  const date = getDate(dateOrTimestamp);
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1;
   const day = date.getUTCDate();
   return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 }
 
-export function formatHumanDate(date) {
+export function formatHumanDate(dateOrTimestamp) {
+  const date = getDate(dateOrTimestamp);
   return `${months[date.getUTCMonth()]} ${date.getUTCDate()}`;
+}
+
+export function getDate(dateOrTimestamp) {
+  const date = (typeof dateOrTimestamp === 'number') ? new Date(dateOrTimestamp) : new Date(dateOrTimestamp.getTime());
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+export function getDateTimestamp(dateOrTimestamp) {
+  if (dateOrTimestamp instanceof Date) {
+    date.setHours(0, 0, 0, 0);
+    return date.getTime();
+  }
+  return dateOrTimestamp - (dateOrTimestamp % 86400000)
 }
 
 export function formatTime(date) {
