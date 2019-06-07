@@ -36,5 +36,5 @@ export function formatTime(date) {
 }
 
 export function formatDateTime(date) {
-  return `${formatDate(date)} ${formatTime(date)}`;
+  return `${formatHumanDate(date)} ${formatTime(date)}`;
 }
