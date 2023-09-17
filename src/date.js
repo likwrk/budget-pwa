@@ -23,6 +23,7 @@ export function getDate(dateOrTimestamp) {
 
 export function getDateTimestamp(dateOrTimestamp) {
   if (dateOrTimestamp instanceof Date) {
+    const date = dateOrTimestamp;
     date.setHours(0, 0, 0, 0);
     return date.getTime();
   }
